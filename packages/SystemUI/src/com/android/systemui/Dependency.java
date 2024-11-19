@@ -58,6 +58,9 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.window.StatusBarWindowController;
 import com.android.systemui.tuner.TunerService;
 
+import com.android.systemui.qs.QSImpl;
+import com.android.systemui.statusbar.phone.ScrimController;
+
 import dagger.Lazy;
 
 import java.util.function.Consumer;
@@ -155,6 +158,8 @@ public class Dependency {
     @Inject Lazy<DialogTransitionAnimator> mDialogTransitionAnimatorLazy;
     @Inject Lazy<UserTracker> mUserTrackerLazy;
     @Inject Lazy<StatusBarWindowController> mStatusBarWindowControllerLazy;
+    @Inject Lazy<QSImpl> mQSImpl;
+    @Inject Lazy<ScrimController> mScrimController;
 
     @Inject
     public Dependency() {
@@ -202,6 +207,8 @@ public class Dependency {
         mProviders.put(DialogTransitionAnimator.class, mDialogTransitionAnimatorLazy::get);
         mProviders.put(UserTracker.class, mUserTrackerLazy::get);
         mProviders.put(StatusBarWindowController.class, mStatusBarWindowControllerLazy::get);
+        mProviders.put(QSImpl.class, mQSImpl::get);
+        mProviders.put(ScrimController.class, mScrimController::get);
 
         Dependency.setInstance(this);
     }
