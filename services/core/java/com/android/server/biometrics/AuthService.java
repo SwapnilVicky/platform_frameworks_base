@@ -51,6 +51,8 @@ import android.hardware.biometrics.ITestSessionCallback;
 import android.hardware.biometrics.PromptInfo;
 import android.hardware.biometrics.SensorLocationInternal;
 import android.hardware.biometrics.SensorPropertiesInternal;
+import android.hardware.biometrics.fingerprint.IFingerprint;
+import android.hardware.biometrics.face.IFace;
 import android.hardware.face.FaceSensorConfigurations;
 import android.hardware.face.FaceSensorProperties;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -74,8 +76,6 @@ import com.android.internal.R;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.ArrayUtils;
 import com.android.server.SystemService;
-import com.android.server.biometrics.sensors.face.FaceService;
-import com.android.server.biometrics.sensors.fingerprint.FingerprintService;
 import com.android.server.biometrics.sensors.face.sense.SenseUtils;
 import com.android.server.companion.virtual.VirtualDeviceManagerInternal;
 
@@ -206,7 +206,7 @@ public class AuthService extends SystemService {
          */
         @VisibleForTesting
         public String[] getFingerprintAidlInstances() {
-            return FingerprintService.getDeclaredInstances();
+            return ServiceManager.getDeclaredInstances(IFingerprint.DESCRIPTOR);
         }
 
         /**
@@ -214,7 +214,7 @@ public class AuthService extends SystemService {
          */
         @VisibleForTesting
         public String[] getFaceAidlInstances() {
-            return FaceService.getDeclaredInstances();
+            return ServiceManager.getDeclaredInstances(IFace.DESCRIPTOR);
         }
 
         /**
@@ -1069,3 +1069,4 @@ public class AuthService extends SystemService {
                 resetLockoutRequiresChallenge);
     }
 }
+
